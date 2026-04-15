@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "Reel Finder",
+  "version": "0.1.0",
+  "description": "Search your Instagram saved reels locally using natural language.",
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": [
+    "https://www.instagram.com/*",
+    "https://instagram.com/*",
+    "https://*.cdninstagram.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.instagram.com/*",
+        "https://instagram.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["public/page-interceptor.js"],
+      "matches": ["https://www.instagram.com/*", "https://instagram.com/*"]
+    }
+  ]
+}
